@@ -4,6 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:data_connection_checker_nulls/data_connection_checker_nulls.dart';
 import 'network_info_test.mocks.dart';
+
 //class MockDataConnectionChecker extends Mock implements DataConnectionChecker {} ==  @GenerateMocks([DataConnectionChecker])
 @GenerateMocks([DataConnectionChecker])
 void main() {
@@ -31,7 +32,7 @@ void main() {
       //verify
       verify(mockDataConnectionChecker.hasConnection);
       //assert
-      expect(result, tHasConnectionFuture);
+      expect(await result, true);
     });
   });
 }

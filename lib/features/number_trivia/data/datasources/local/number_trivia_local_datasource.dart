@@ -21,9 +21,9 @@ class NumberTriviaLocalDatasourceImpl implements NumberTriviaLocalDatasource {
 
   @override
   Future<NumberTriviaModel> getLastNumberTrivia() {
-    final jsonString = sharedPreferences.getString(CACHED_NUMBER_TRIVIA);
+    final jsonString = sharedPreferences.getString(CACHED_NUMBER_TRIVIA);//return sync not future that's why we need Future.value to get Future result 
     if (jsonString != null) {
-      return Future.value(NumberTriviaModel.fromJson(json.decode(jsonString!)));
+      return Future.value(NumberTriviaModel.fromJson(json.decode(jsonString)));
     } else {
       throw CacheException();
     }

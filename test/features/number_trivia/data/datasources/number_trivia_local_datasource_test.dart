@@ -89,8 +89,8 @@ void main() {
 
 
 /*
-verify(mock.method()) - Vérifie qu'elle a été appelée exactement 1 fois
-verifyNever(mock.method()) - Vérifie qu'elle n'a jamais été appelée
-verify(mock.method()).called(3) - Vérifie qu'elle a été appelée 3 fois
-verifyInOrder([...]) - Vérifie l'ordre des appels
+verify(mock.method()) - Verifies that it was called exactly 1 time
+verifyNever(mock.method()) - Verifies that it was never called
+verify(mock.method()).called(3) - Verifies that it was called 3 times
+verifyInOrder([...]) - Verifies the order of calls
 */
