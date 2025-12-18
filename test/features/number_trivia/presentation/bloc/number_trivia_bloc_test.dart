@@ -32,7 +32,7 @@ void main() {
   test('initial state should be empty', () {
     //assert
 
-    expect(numberTriviaBloc.initialState, equals(Empty()));
+    expect(numberTriviaBloc.state, equals(Empty()));
   });
 
   group('GetTriviaForConcreteNumber', () {
@@ -47,6 +47,8 @@ void main() {
         when(
           mockInputConverter.stringToUnsignedInteger(any),
         ).thenReturn(Right(tNumberParsed));
+        when(mockGetConcreteNumberTrivia(any))
+            .thenAnswer((_) async => Right(tNumberTrivia));
         //act
         numberTriviaBloc.add(GetTriviaForConcreteNumber(tNumberString));
 
@@ -56,15 +58,15 @@ void main() {
       },
     );
 
-    test('Should emit [Error] state when input is valid', () async {
+    test('Should emit [Error] state when input is invalid', () async {
       //arrange
       when(
         mockInputConverter.stringToUnsignedInteger(any),
       ).thenReturn(Left(InvalidInputFailure()));
       //assert later => 30 second then test fail
       //bloc will emit by default Empty that's why we added it here
-      final expected = [Empty(), Error(message: INVALID_INPUT_FAILURE_MESSAGE)];
-      expectLater(numberTriviaBloc.state, emitsInOrder(expected));
+      final expected = [Error(message: INVALID_INPUT_FAILURE_MESSAGE)];
+      expectLater(numberTriviaBloc.stream, emitsInOrder(expected));
       //act
       numberTriviaBloc.add(GetTriviaForConcreteNumber(tNumberString));
     });
